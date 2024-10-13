@@ -1,18 +1,8 @@
-# Use an official Node.js runtime as a parent image
-FROM node:14
+# Use an nginx base image to serve the website
+FROM nginx:alpine
 
-# Set the working directory
-WORKDIR /usr/src/app
+# Copy website files to the nginx directory
+COPY . /usr/share/nginx/html
 
-# Copy package.json and install dependencies
-COPY package*.json ./
-RUN npm install
-
-# Copy the rest of the application files
-COPY . .
-
-# Expose the application port
-EXPOSE 9090
-
-# Run the application
-CMD ["npm", "start"]
+# Expose port 80 for the website
+EXPOSE 80
